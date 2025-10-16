@@ -1,0 +1,20 @@
+import Image from "next/image";
+
+export default function CategoryPicBox() {
+  return (
+    <section className="w-5/6 md:w-1/4 h-[40dvh] md:h-[45dvh]  flex flex-col justify-between items-center gap-4 pb-3 bg-[#b8c9e934]">
+      <div className="pic w-5/6 mx-auto  h-4/5  relative">
+        <Image
+          alt="pic"
+          height={200}
+          width={200}
+          className="absolute w-full h-full object-cover"
+          src={"/moneybags/02.jpg"}
+        />
+      </div>
+      <div className="border-b-3  py-2 w-5/6 mx-auto text-center text-black uppercase text-xs">
+        article
+      </div>
+    </section>
+  );
+}
