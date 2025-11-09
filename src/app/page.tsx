@@ -28,12 +28,12 @@ export default async function Home() {
     <>
       <HeroSection />
 
-      <div className="newArrival my-5 border">
+      <div className="newArrival my-5 ">
         {latestData?.length > 0 && (
           <>
             <CategoryTitle title="New Arrival" />
             <Link
-              className="text-right  capitalize block mr-5"
+              className="text-right  capitalize block mr-5  text-categoryHeader"
               href="/products/latest"
             >
               see all
@@ -51,7 +51,7 @@ export default async function Home() {
         <div className="sale my-5">
           <CategoryTitle title="on Sale" />
           <Link
-            className="text-right  capitalize block mr-5"
+            className="text-right  capitalize block mr-5  text-categoryHeader"
             href="/products/sale"
           >
             see all

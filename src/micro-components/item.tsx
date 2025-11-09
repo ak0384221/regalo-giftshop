@@ -17,13 +17,12 @@ type Tproduct = {
 };
 
 export default function Item({ item }: { item: Tproduct }) {
-  console.log(item);
   return (
     <Link
-      className="w-full h-[70dvh] md:h-[55dvh]  md:w-[40dvw] lg:w-1/4 relative "
+      className="w-full h-[70dvh] bg-itemBg  md:h-[55dvh]  md:w-[40dvw] lg:w-1/4 relative "
       href={`/products/${item?._id}`}
     >
-      <div className="item  h-full  bg-[#f0f0f0] p-2 ">
+      <div className="item  h-full   p-2 ">
         <div className="pic h-[75%]  capitalize relative ">
           <Image
             src={item?.images[0]}

@@ -45,25 +45,25 @@ export default function ProductsPcsAdd({ item }: any) {
       <div className="products quanity  w-[10rem] flex justify-center gap-2 items-center">
         <FaSquarePlus
           onClick={productIncrement}
-          className="text-4xl cursor-pointer text-green-600"
+          className="text-4xl cursor-pointer text-white"
         />
 
         <input
           value={productsQuantity}
           readOnly
           type="number"
-          className="  h-8 text-center  border-neutral-400 bg-white text-black size-10 focus:outline-0"
+          className="  h-8 text-center  border-neutral-400 size-10 focus:outline-0"
         />
 
         <FaSquareMinus
           onClick={productDecrement}
-          className="text-4xl cursor-pointer text-red-500"
+          className="text-4xl cursor-pointer text-white "
         />
       </div>
       <div className="">
         <button
           onClick={handleCart}
-          className="px-3 py-2 bg-blue-400 text-white cursor-pointer active:bg-red-500 "
+          className="px-8 py-2 rounded-md bg-cartButton text-white cursor-pointer  "
         >
           {cartMessage}
         </button>

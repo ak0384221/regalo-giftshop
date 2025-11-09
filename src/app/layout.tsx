@@ -31,7 +31,7 @@ export default function RootLayout({
       <head>
         <link rel="shortcut icon" href="/regalo.png" type="image/x-icon" />
       </head>
-      <body>
+      <body className="bg-rootBg">
         <Navbar />
         <div className=" mt-[15dvh]">{children}</div>
         {/* <Footer /> */}

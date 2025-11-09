@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+@theme {
+  /* home */
+
+  --color-rootBg: black;
+  --color-posterBg: black;
+
+  /* itemBox */
+
+  --color-itemBg: white;
+  --color-itemCategory: black;
+  --color-itemName: black;
+  --color-itemPrice: black;
+
+  /* discountTooltip */
+
+  --color-discountTooltipText: black;
+  --color-discountTooltipBg: white;
+
+  /*navbar*/
+
+  --color-navbarBg: black;
+  --color-navbarText: white;
+  --color-navbarIcons: white;
+
+  /*navbar dropdowns */
+  --color-navbarDropdownBg: black;
+  --color-navbarDropdownText: white;
+  --color-navbarDropdownHoverBg: beige;
+  --color-navbarDropdownHoverText: black;
+
+  /*category header*/
+  --color-categoryHeader: white;
+
+  /*cart*/
+  --color-cartText: white;
+  --color-cartPreDiscountText: Red;
+  --color-cartPostDiscountText: White;
+  --color-cartQuantityNumber: white;
+  --color-cartSubtotalPrice: white;
+  --color-cartItemRemoveBtn: Red;
+  --color-cartTotalText: Yellow;
+  --color-cartButton: #3b2f72;
+
+  /*product detail page*/
+  --color-productDetailPageText: White;
+}

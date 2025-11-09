@@ -9,7 +9,7 @@ export default function ProductDetails({ item }: { item: any }) {
   ).toFixed(2);
 
   return (
-    <div className="details border border-neutral-400 w-5/6 mt-[5vh] md:mt-[10dvh] p-2 flex flex-col gap-8   mx-auto  justify-center md:flex-row ">
+    <div className="details text-productDetailPageText w-5/6 mt-[5vh] md:mt-[10dvh] p-2 flex flex-col gap-8   mx-auto  justify-center md:flex-row ">
       <div className="img w-full h-[60dvh]  flex justify-center items-center">
         <Image
           alt={item?.name}
@@ -23,12 +23,13 @@ export default function ProductDetails({ item }: { item: any }) {
         <p>product ID: {item?._id}</p>
 
         <TextStyleInItem style="category" text={item?.category} />
-        <div className="border p-2">
-          <sub>Original price </sub>
-          <b className="text-3xl">${item?.price}</b>
+        <div className="">
+          <sub className="">Original price </sub>
+          <b className="text-3xl mx-2">${item?.price}</b>
+          <br />
           <br />
           <b className="text-3xl">{discountedPrice}$</b>
-          <sub>final price </sub>
+          <sub className="mx-2">final price </sub>
         </div>
 
         <p>{item?.name}</p>
