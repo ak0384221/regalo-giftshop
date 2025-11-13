@@ -3,8 +3,9 @@
 @theme {
   /* home */
 
-  --color-rootBg: black;
-  --color-posterBg: black;
+  --color-rootBg: Black;
+  --color-posterBg: Black;
+  --color-rootText: white;
 
   /* itemBox */
 
@@ -20,7 +21,7 @@
 
   /*navbar*/
 
-  --color-navbarBg: black;
+  --color-navbarBg: Black;
   --color-navbarText: white;
   --color-navbarIcons: white;
 

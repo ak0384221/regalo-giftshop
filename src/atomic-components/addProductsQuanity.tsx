@@ -1,73 +1,124 @@
 "use client";
-import { useState } from "react";
 
-import { FaSquareMinus, FaSquarePlus } from "react-icons/fa6";
+import { useState } from "react";
+import { IoAddCircle } from "react-icons/io5";
+import { BiSolidMinusCircle } from "react-icons/bi";
 
 export default function ProductsPcsAdd({ item }: any) {
   const [productsQuantity, setProductQuantity] = useState(1);
   const [cartMessage, setCartMessage] = useState("Add to cart");
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+
   function productIncrement() {
     setProductQuantity((prev) => prev + 1);
   }
+
   function productDecrement() {
-    if (productsQuantity > 1) {
-      setProductQuantity((prev) => prev - 1);
-    }
+    if (productsQuantity > 1) setProductQuantity((prev) => prev - 1);
   }
 
   async function sendCartToBackend(cartObj: object) {
-    fetch("http://localhost:5000/api/cart", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cartObj),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Cart saved:", data);
-        setCartMessage(() => "Item is Added");
-      })
-      .catch((err) => {
-        console.log("Error saving cart:", err);
-        setCartMessage(() => "failed");
+    try {
+      const res = await fetch("http://localhost:5000/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cartObj),
       });
+      const data = await res.json();
+      console.log("Cart saved:", data);
+      setCartMessage("Item Added");
+    } catch (err) {
+      console.log("Error saving cart:", err);
+      setCartMessage("Failed to add");
+    }
   }
+
   function handleCart() {
+    if (!selectedSize || !selectedColor) {
+      setCartMessage("Select all options");
+      return;
+    }
+
     const cartObj = {
-      productId: item._id,
+      product: item._id,
+      productId: item.productId,
       quantity: productsQuantity,
+      color: selectedColor,
+      size: selectedSize,
     };
     sendCartToBackend(cartObj);
   }
-  return (
-    <>
-      <div className="products quanity  w-[10rem] flex justify-center gap-2 items-center">
-        <FaSquarePlus
-          onClick={productIncrement}
-          className="text-4xl cursor-pointer text-white"
-        />
 
+  return (
+    <div className="w-full md:w-1/2 flex flex-col gap-6 mt-8 text-white">
+      {/* Variants Selector */}
+      {item.variants && item.variants.length > 0 && (
+        <div className="flex flex-col gap-4">
+          <h3 className="text-lg font-semibold">Choose Options</h3>
+
+          {item.variants.map((variant: any, index: number) => (
+            <div key={index} className="flex flex-col gap-3">
+              <span className="font-medium capitalize">
+                Size: {variant.size}
+              </span>
+              <div className="flex gap-3">
+                {variant.colors.map((color: any, idx: number) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      setSelectedSize(variant.size);
+                      setSelectedColor(color.colorName);
+                    }}
+                    className={`w-8 h-8 rounded-full border-2 transition-all ${
+                      selectedColor === color.colorName &&
+                      selectedSize === variant.size
+                        ? "scale-110 border-white"
+                        : "border-gray-500 hover:border-gray-300"
+                    }`}
+                    style={{ backgroundColor: color.colorName }}
+                    title={`${color.colorName} (${color.stock} in stock)`}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Quantity Selector */}
+      <div className="flex items-center gap-3">
+        <IoAddCircle
+          onClick={productIncrement}
+          className="text-4xl cursor-pointer hover:text-gray-300"
+        />
         <input
           value={productsQuantity}
           readOnly
           type="number"
-          className="  h-8 text-center  border-neutral-400 size-10 focus:outline-0"
+          className="h-8 w-12 text-center bg-transparent border border-gray-500 rounded-md focus:outline-none"
         />
-
-        <FaSquareMinus
+        <BiSolidMinusCircle
           onClick={productDecrement}
-          className="text-4xl cursor-pointer text-white "
+          className="text-4xl cursor-pointer hover:text-gray-300"
         />
       </div>
-      <div className="">
-        <button
-          onClick={handleCart}
-          className="px-8 py-2 rounded-md bg-cartButton text-white cursor-pointer  "
-        >
-          {cartMessage}
-        </button>
-      </div>
-    </>
+
+      {/* Add to Cart Button */}
+      <button
+        onClick={handleCart}
+        className="w-max px-8 py-3 rounded-md bg-gradient-to-r from-gray-700 to-gray-900 text-white font-medium hover:from-gray-600 hover:to-gray-800 transition-all duration-200"
+      >
+        {cartMessage}
+      </button>
+
+      {/* Selected Details */}
+      {(selectedColor || selectedSize) && (
+        <p className="text-sm text-gray-400">
+          Selected: {selectedSize ? `${selectedSize}, ` : ""}
+          {selectedColor ? selectedColor : ""}
+        </p>
+      )}
+    </div>
   );
 }

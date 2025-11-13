@@ -5,34 +5,53 @@ import { MdOutlineMenu } from "react-icons/md";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
+
   const mobileNav = [
-    { name: "Tshirt", link: "/products/category/tshirt" },
-    { name: "Watch", link: "/products/category/watch" },
-    { name: "shoes", link: "/products/category/shoes" },
-    { name: "jewelry", link: "/products/category/jewelry" },
-    { name: "about us", link: "/about" },
-    { name: "profile", link: "/profile" },
+    { name: "beauty" },
+    { name: "fragrances" },
+    { name: "furniture" },
+    { name: "groceries" },
+    { name: "home-decoration" },
+    { name: "kitchen-accessories" },
+    { name: "laptops" },
+    { name: "mens-shirts" },
+    { name: "mens-shoes" },
+    { name: "mens-watches" },
+    { name: "mobile-accessories" },
+    { name: "motorcycle" },
+    { name: "skin-care" },
+    { name: "smartphones" },
+    { name: "sports-accessories" },
+    { name: "sunglasses" },
+    { name: "tablets" },
+    { name: "tops" },
+    { name: "vehicle" },
+    { name: "womens-bags" },
+    { name: "womens-dresses" },
+    { name: "womens-jewellery" },
+    { name: "womens-shoes" },
+    { name: "womens-watches" },
   ];
+
   const liStyle =
-    "hover:bg-neutral-800 w-full h-full flex justify-center items-center cursor-pointer";
+    "hover:bg-neutral-800  h-full flex justify-center items-center cursor-pointer py-2 ";
   return (
-    <div className="mobile  h-max nav 3dot lg:hidden relative border ">
+    <div className="mobile  h-max nav 3dot    ">
       <MdOutlineMenu
         onClick={() => setIsOpen(!isOpen)}
-        className="text-4xl cursor-pointer "
+        className="text-4xl cursor-pointer text-white"
       />
       {isOpen && (
-        <div className="mobile option absolute right-5 top-[7vh] w-[50dvw] bg-black h-[50dvh] text-white">
-          <ul className="h-full  divide-y-1 divide-neutral-700 flex flex-col justify-evenly items-center">
+        <div className="mobile option absolute right-5 top-[10vh] w-[90dvw] md:w-[40dvw] bg-[#1c1f24] h-max text-white z-50">
+          <ul className="h-full   grid grid-cols-2 gap-2 ">
             {mobileNav.map((nav) => (
               <Link
                 onClick={() => setIsOpen(false)}
                 className={`${liStyle}`}
                 key={nav.name}
-                href={nav.link}
+                href={`/user/products/category/${nav.name}`}
               >
-                {" "}
-                <li>{nav.name}</li>
+                <li className="capitalize">{nav.name}</li>
               </Link>
             ))}
           </ul>
